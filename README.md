@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <h3 align="center">
   Sistemas Distribuídos :computer: :astronaut:
 </h3>
