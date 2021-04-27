@@ -4,14 +4,15 @@
  */
 
 public class Cliente {
-    boolean esperando = false;
     int id;
-    Cadeira p;
     boolean atendido = false;
+    boolean esperando = false;
+    
+    Cadeira cadeira;
     BarbeiroDorminhoco barbeiro;
 
     Cliente(BarbeiroDorminhoco barbeiro, int id) {
-        this.barbeiro = babeiro;
+        this.barbeiro = barbeiro;
         this.id = id;
     }
 }
