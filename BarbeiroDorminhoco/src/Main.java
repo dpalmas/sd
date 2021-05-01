@@ -9,7 +9,10 @@ public class Main {
 
     public static ArrayList<Cadeira> cadeiras = new ArrayList<>();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) 
+    {
+        BarbeiroDorminhoco barbeiroDorminhoco = new BarbeiroDorminhoco();
+
         int nCadeiras = 3;
         int nClientes = 5;
 
@@ -18,6 +21,12 @@ public class Main {
             cadeiras.add(cadeira);
         }
 
-        
+        Barbeiro barbeiroThread = new Barbeiro(barbeiroDorminhoco);
+
+        barbeiroThread.start();
+
+
+
+
     }
 }
