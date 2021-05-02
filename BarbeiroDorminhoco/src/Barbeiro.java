@@ -8,8 +8,16 @@ public class Barbeiro extends Thread
     }
 
     @Override
-    public void run() {
-        
-        super.run();
+    public void run() 
+    {
+        while(true)
+        {
+            try 
+            {
+                Thread.sleep(3000);
+                barbeiroDorminhoco.Trabalhando();
+            } 
+            catch (Exception e) { }
+        }
     }
 }

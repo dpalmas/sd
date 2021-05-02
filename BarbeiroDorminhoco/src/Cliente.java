@@ -3,16 +3,34 @@
  * @project BarbeiroDorminhoco
  */
 
-public class Cliente {
+public class Cliente extends Thread {
     int id;
     boolean atendido = false;
     boolean esperando = false;
     
     Cadeira cadeira;
-    BarbeiroDorminhoco barbeiro;
+    BarbeiroDorminhoco barbeiroDorminhoco;
 
-    Cliente(BarbeiroDorminhoco barbeiro, int id) {
-        this.barbeiro = barbeiro;
+    Cliente(BarbeiroDorminhoco barbeiroDorminhoco, int id) {
+        this.barbeiroDorminhoco = barbeiroDorminhoco;
         this.id = id;
+    }
+
+    @Override
+    public void run() 
+    {
+        // while (true) 
+        // {
+            try 
+            {
+                Thread.sleep(3000);
+                barbeiroDorminhoco.ManejarCliente(this);
+            } catch (Exception e) { }
+        //}
+    }
+
+    public int GetId()
+    {
+        return id; 
     }
 }
