@@ -23,7 +23,7 @@ public class Cliente extends Thread {
         // {
             try 
             {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
                 barbeiroDorminhoco.ManejarCliente(this);
             } catch (Exception e) { }
         //}

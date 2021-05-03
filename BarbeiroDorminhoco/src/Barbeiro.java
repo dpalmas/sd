@@ -14,7 +14,7 @@ public class Barbeiro extends Thread
         {
             try 
             {
-                Thread.sleep(3000);
+                Thread.sleep(1000);
                 barbeiroDorminhoco.Trabalhando();
             } 
             catch (Exception e) { }

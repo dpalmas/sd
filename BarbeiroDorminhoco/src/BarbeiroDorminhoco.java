@@ -10,7 +10,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class BarbeiroDorminhoco {
     boolean dormindo = true;
     boolean cortando = false;
-    int quantidadeCadeiras = 8; 
+    int quantidadeCadeiras = 3; 
 
     //int contadorClientesAtendidos = 0; 
 
@@ -35,7 +35,7 @@ public class BarbeiroDorminhoco {
                 filaDeClientes.poll();
                 cortando = true; 
                 System.out.println("Barbeiro: Estou atendendo o Cliente " + idCliente);
-                Thread.sleep(3000);
+                Thread.sleep(1000);
 
             }
             
@@ -57,13 +57,14 @@ public class BarbeiroDorminhoco {
                 if(filaDeClientes.size() < quantidadeCadeiras)
                 {
                     filaDeClientes.offer(cliente);
+                    System.out.println("Cliente " + idCliente + ": Estou na fila");
                     clientesRecebidos.add(cliente);
                 }
                 else
                 {
                     System.out.println("Cliente " + idCliente + ": Não existe cadeira disponível, vou embora");
                     clientesRecebidos.add(cliente);
-                    Thread.sleep(3000);
+                    Thread.sleep(1000);
                 }
             }
 
@@ -72,7 +73,6 @@ public class BarbeiroDorminhoco {
                 if(dormindo)
                 {
                     System.out.println("Cliente " + idCliente + ": Acorda aí barbeiro");
-                    System.out.println("Barbeiro: Back to work");
                     notify();
                     dormindo = false; 
                 }
@@ -80,7 +80,7 @@ public class BarbeiroDorminhoco {
                 wait();
             }
 
-            //notifyAll();
+            notifyAll();
             
         } catch (InterruptedException e) 
         {
