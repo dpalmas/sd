@@ -4,23 +4,30 @@ public class Waiter extends Thread
 {
     LinkedBlockingQueue<Client> clientsQueue = new LinkedBlockingQueue<>();
 
+    Bar bar = new Bar();
     Client client1 = new Client();
     Client client2 = new Client();
     Client client3 = new Client();
     
     @Override
-    public void run() {
-        while(true) // enquanto tem clientes no bar 
-        {
+    public void run() 
+    {
+        // while(true) // enquanto tem clientes no bar 
+        // {
             try 
             {
-                
+                DeliverDrink();
             } 
-            catch (Exception e) 
+            catch (InterruptedException e)            
             {
-
+                e.printStackTrace();
             }
-        }
+        //}
+    }
+
+    synchronized public void noticabrasilllllllll() throws InterruptedException {
+        Thread.sleep(3000);
+        notifyAll();
     }
 
     void CheckOrders()
@@ -40,6 +47,15 @@ public class Waiter extends Thread
     void CollectDrinks()
     {
 
+    }
+
+    void DeliverDrink() throws InterruptedException
+    {
+        Thread.sleep(3000);
+        System.out.println("Acordando cliente");
+
+        Client client = clientsQueue.peek();
+        client.Wakeup();
     }
 
     // add clientes to queue
