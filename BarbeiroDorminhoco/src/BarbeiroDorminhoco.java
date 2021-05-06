@@ -2,11 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-/**
- * @author davi on 4/19/21
- * @project BarbeiroDorminhoco
- */
-
 public class BarbeiroDorminhoco {
     boolean dormindo = true;
     boolean cortando = false;
