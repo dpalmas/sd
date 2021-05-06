@@ -5,9 +5,6 @@ public class Waiter extends Thread
     LinkedBlockingQueue<Client> clientsQueue = new LinkedBlockingQueue<>();
 
     Bar bar = new Bar();
-    Client client1 = new Client();
-    Client client2 = new Client();
-    Client client3 = new Client();
     
     @Override
     public void run() 
@@ -15,8 +12,10 @@ public class Waiter extends Thread
         // while(true) // enquanto tem clientes no bar 
         // {
             try 
-            {
-                DeliverDrink();
+            {   
+                CheckOrders();
+                CollectDrinks();
+                DeliverDrinks();
             } 
             catch (InterruptedException e)            
             {
@@ -25,42 +24,51 @@ public class Waiter extends Thread
         //}
     }
 
-    synchronized public void noticabrasilllllllll() throws InterruptedException {
-        Thread.sleep(3000);
-        notifyAll();
-    }
-
-    void CheckOrders()
+    void CheckOrders() throws InterruptedException
     {
         for (Client client : clientsQueue) 
         {
-            if (!client.hasOrdered) 
-            {
-                System.out.println("Falta um pedido a ser atendido");
-            }
+            client.Order();
+            System.out.println("Waiter: Recebendo pedido dos clientes");
+            // if (!client.hasOrdered) 
+            // {
+            //     System.out.println("Falta um pedido a ser atendido");
+            // }
         }
 
         // se todos os pedidos forem atendidos 
         // colect drinks
     }
 
-    void CollectDrinks()
+    void CollectDrinks() throws InterruptedException
     {
-
+        Thread.sleep(1000);
+        System.out.println("Waiter: Coletando pedido dos clientes");
     }
 
-    void DeliverDrink() throws InterruptedException
+    void DeliverDrinks() throws InterruptedException
     {
-        Thread.sleep(3000);
-        System.out.println("Acordando cliente");
 
-        Client client = clientsQueue.peek();
-        client.Wakeup();
+        for (Client client:clientsQueue)
+        {
+            Thread.sleep(3000);
+            System.out.println("Waiter: Acordando cliente");
+
+            client.Wakeup();
+        }
+
+        // Thread.sleep(1000);
+        // System.out.println("Waiter: Acordando cliente");
+
+        // Client client = clientsQueue.peek();
+        // client.Wakeup();
     }
 
     // add clientes to queue
         // foreach or something like that
         // add cliente to the queue 
+
+
 
     
 }

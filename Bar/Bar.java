@@ -3,24 +3,26 @@ public class Bar
     public static void main(String[] args) throws Exception 
     {
         Client client = new Client();
+        Client client2 = new Client();
         Waiter waiter = new Waiter();
 
         waiter.clientsQueue.offer(client);
+        waiter.clientsQueue.offer(client2);
         
-        client.start();
         waiter.start();
+        client.start();
+        client2.start();
 
         try 
         {
-            client.join();
             waiter.join();
+            client.join();
+            client2.join();
         } 
         catch (Exception e) 
         {
 
         }
-
-        waiter.DeliverDrink();
     }
 
     public synchronized void WaitForOrder()
