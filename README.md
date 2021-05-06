@@ -27,7 +27,7 @@ pedido quando todos os C clientes que ele pode atender tiverem feito o pedido ou
 
 - A quantidade de clientes presentes no estabelecimento;
 - A quantidade de garçons que estão trabalhando;
-- A capacidade de atendimento dos garçons; e
+- A capacidade de atendimento dos garçons;
 - O número de rodadas que serão liberadas no bar.
 
 Cada garçom e cada cliente devem ser representados por threads, estruturalmente definidos como os
