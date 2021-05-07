@@ -1,5 +1,5 @@
 <h3 align="center">
-  Sistemas Distribuídos :computer: :man_technologist:
+  Sistemas Distribuídos :man_technologist:
 </h3>
 
 <p align="center">Repositório para atividades da disciplina de Sistemas Distribuídos.</a>
