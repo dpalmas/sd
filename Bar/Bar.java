@@ -1,57 +1,79 @@
-public class Bar 
+import java.util.concurrent.LinkedBlockingQueue;
+
+public class Bar extends Thread 
 {
-    public static void main(String[] args) throws Exception 
-    {
-        Client client = new Client();
-        Client client2 = new Client();
-        Waiter waiter = new Waiter();
+    LinkedBlockingQueue<Waiter> waitersQueue = new LinkedBlockingQueue<>();
 
-        waiter.clientsQueue.offer(client);
-        waiter.clientsQueue.offer(client2);
+    boolean waiteresAreWaiting = true; 
+    boolean barIsOpen = true; 
+    int rounds = 5; 
+
+    @Override
+    public void run() 
+    {
+        while(barIsOpen)
+        {   
+            try 
+            {
+                RoundsController();
+                VerifyWaiters();
+                
+                if(waiteresAreWaiting)
+                {
+                    rounds--;
+                    System.out.println(rounds);
+                    waiteresAreWaiting = false;    
+                    RunAnotherRound();                 
+                }
+            } 
+            catch (Exception e) 
+            {
+
+            }   
+        } 
+    }
+
+    public void VerifyWaiters()
+    {
+        for (Waiter waiter : waitersQueue) 
+        {
+            if (waiter.GetIsWaitingForNextRound()) 
+            { 
+                continue; 
+            }
+            else
+            {
+                return; 
+            }
+
+        }
+        waiteresAreWaiting = true; 
+    }
+
+    public void RunAnotherRound()
+    {
+        for (Waiter waiter : waitersQueue) 
+        {
+            waiter.run();
+        }
+    }
+
+    public void RoundsController()
+    {
+        while(barIsOpen)
+        {
+            if(rounds <= 0)
+            {
+                barIsOpen = false; 
+            }
+        }
         
-        waiter.start();
-        client.start();
-        client2.start();
-
-        try 
-        {
-            waiter.join();
-            client.join();
-            client2.join();
-        } 
-        catch (Exception e) 
-        {
-
-        }
     }
 
-    public synchronized void WaitForOrder()
+    public boolean GetBarIsOpen()
     {
-        try 
-        {
-            wait();
-        } 
-        catch (InterruptedException e) 
-        {
-            e.printStackTrace();
-        }
-        notifyAll();
+        return barIsOpen;
     }
-
-    public synchronized void DeliverDrink()
-    {
-        try 
-        {
-            wait();
-        } 
-        catch (InterruptedException e) 
-        {
-            e.printStackTrace();
-        }
-        notifyAll();
-    }
-
-
 
     // int clientCount = 20;
     // int waiterCount = 2;

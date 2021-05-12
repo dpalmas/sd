@@ -4,12 +4,17 @@ public class Client extends Thread
 
     boolean hasOrdered = false; 
     boolean hasConsumed = false; 
-    boolean hasWaiting = false; 
+    boolean isWaiting = false; 
+
+    Client(Bar bar)
+    {
+        this.bar = bar;
+    }
 
     @Override
     public void run() 
     {
-        while(true) // não fechou o bar 
+        while(bar.GetBarIsOpen()) 
         {
             try 
             {
@@ -17,7 +22,7 @@ public class Client extends Thread
 
                 if (hasOrdered)
                 {
-                    if (!hasWaiting)
+                    if (!isWaiting)
                     {
                         WaitForOrder();
                     }
@@ -42,12 +47,13 @@ public class Client extends Thread
     synchronized void WaitForOrder() throws InterruptedException    
     {
         System.out.println("Cliente: Esperando pedido");
-        hasWaiting = true; 
+        isWaiting = true; 
         wait();
     }
 
     private void ReceiveOrder() throws InterruptedException 
     {
+        isWaiting = false;
         System.out.println("Cliente: Recebendo pedido");
         Thread.sleep(1000);
     }
@@ -55,8 +61,8 @@ public class Client extends Thread
     private void ConsumeOrder() throws InterruptedException
     {
         hasConsumed = true;
-        //hasOrdered = false;  
-        //hasWaiting = false;
+        hasOrdered = false;  
+
         System.out.println("Cliente: Consumindo pedido");
         Thread.sleep(1000);
     }
@@ -64,5 +70,20 @@ public class Client extends Thread
     synchronized public void Wakeup()
     {
         notifyAll();
+    }
+
+    public boolean GetHasOrdered()
+    {
+        return hasOrdered;
+    }
+
+    public boolean GetHasConsumed()
+    {
+        return hasConsumed; 
+    }
+
+    public void SetHasConsumed(boolean value)
+    {
+        hasConsumed = value; 
     }
 }

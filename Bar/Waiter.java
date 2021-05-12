@@ -4,16 +4,21 @@ public class Waiter extends Thread
 {
     LinkedBlockingQueue<Client> clientsQueue = new LinkedBlockingQueue<>();
 
+    boolean isWaiting = false;
+    boolean canCollectOrders = false; 
+    boolean waitingForNextRound = false; 
+
     Bar bar = new Bar();
     
     @Override
     public void run() 
     {
-        // while(true) // enquanto tem clientes no bar 
-        // {
+        //while(true) // enquanto tem clientes no bar 
+        //{
             try 
             {   
-                CheckOrders();
+                //CheckOrders();
+                CollectOrders();
                 CollectDrinks();
                 DeliverDrinks();
             } 
@@ -28,8 +33,19 @@ public class Waiter extends Thread
     {
         for (Client client : clientsQueue) 
         {
+            if(!client.GetHasOrdered()) 
+            { 
+
+            }    
+        }
+        canCollectOrders = true;
+    }
+
+    private void CollectOrders() {
+        for (Client client : clientsQueue) 
+        {
             client.Order();
-            System.out.println("Waiter: Recebendo pedido dos clientes");
+            System.out.println("Waiter: Recebendo pedido dos cliente");
             // if (!client.hasOrdered) 
             // {
             //     System.out.println("Falta um pedido a ser atendido");
@@ -40,13 +56,18 @@ public class Waiter extends Thread
         // colect drinks
     }
 
-    void CollectDrinks() throws InterruptedException
+    synchronized void CollectDrinks() throws InterruptedException
     {
         Thread.sleep(1000);
-        System.out.println("Waiter: Coletando pedido dos clientes");
+        System.out.println("Waiter: Registrando e esperando os pedidos dos clientes ficarem prontos");
+        isWaiting = true; 
+        //wait();
+        System.out.println("Waiter: Coletando os pedidos dos clientes");
+        Thread.sleep(1000);
+
     }
 
-    void DeliverDrinks() throws InterruptedException
+    synchronized void DeliverDrinks() throws InterruptedException
     {
 
         for (Client client:clientsQueue)
@@ -57,18 +78,17 @@ public class Waiter extends Thread
             client.Wakeup();
         }
 
-        // Thread.sleep(1000);
-        // System.out.println("Waiter: Acordando cliente");
-
-        // Client client = clientsQueue.peek();
-        // client.Wakeup();
+        waitingForNextRound = true; 
+        //System.out.println(waitingForNextRound); 
     }
 
-    // add clientes to queue
-        // foreach or something like that
-        // add cliente to the queue 
+    synchronized public void Wakeup() 
+    {
+        notifyAll();
+    }
 
-
-
-    
+    public boolean GetIsWaitingForNextRound()
+    {
+        return waitingForNextRound;
+    }
 }
