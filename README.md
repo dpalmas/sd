@@ -1,6 +1,6 @@
-<h3 align="center">
+<h1 align="center">
   Sistemas Distribuídos :man_technologist:
-</h3>
+</h1>
 
 <p align="center">Repositório para atividades da disciplina de Sistemas Distribuídos.</a>
 </p>
