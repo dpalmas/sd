@@ -16,6 +16,8 @@
   </a>
 </p>
 
+## Threads
+
 ### Bar
 
 **1° Exercício :pencil:**
@@ -72,3 +74,48 @@ Conserte os problemas:
 
 - Roleta
 - Saldo bancário
+
+## Sockets
+
+### Eco
+
+**1° Exercício :pencil:**
+
+O cliente lê do teclado e envia para o servidor. O servidor recebe e reenvia para o cliente. O cliente então imprime o que recebeu e reinicia a leitura do 
+teclado.
+
+### Fortunes
+
+**2° Exercício :pencil:**
+
+O objetivo deste exercício é imitar o funcionamento do conhecido biscoito da sorte chinês(fortune cookie) em um ambiente distribuído. O fortune, a cada invocação, imprime para o usuário uma frase escolhida aletoriamente a partir de uma base de dados de frases.
+
+- A ideia nesse exercício é construir um servidor de fortunes que suporte 2 operações: <br>
+  i. GET-FORTUNE: retorna a frase correntemente armazenada no servidor; <br>
+  ii. SET-FORTUNE: modifica a frase armazenada no servidor.
+
+- O protocolo de comunicação entre clientes e servidor é baseado em comandos representados como texto. Assim ao receber a string "GET-FORTUNE" o servidor deve responder com a frase corrente. Por sua vez, a operação SET-FORTUNE assume a forma: "SET-FORTUNE\nNova frase\n".
+
+### Cliente
+
+**3° Exercício :pencil:**
+
+Implemente um servidor que aceite a ligação de um cliente de cada vez. O servidor receberá de cada cliente, uma sequência de inteiros - pode optar tanto pelo formato binário como de texto - que terminará quando detectar a situação de <i>end of file</i> na <i>stream</i> de leitura do socket. No final da leitura dos valores inteiros, o servidor devolve ao cliente a soma correspondente.
+
+### Jogo da forca
+
+**4° Exercício :pencil:**
+
+Implemente um jogo da forca remoto, com apenas 1 jogador. A definição da palavra a ser advinhada ficará no servidor. O jogador poderá ser desconectado do jogo se ele digitar a frase "bye" ou for enforcado. E pra entrar no jogo novamente, ele terá que aguardar uma nova conexão.
+
+### Banco
+
+**5° Exercício :pencil:**
+
+Implemente um servidor de um Banco, que permita a conexão de um cliente por vez. Dado o número da conta, o cliente poderá realizar deposito, saque, ver seu saldo ou sair da aplicação.
+
+### Banco2
+
+**6° Exercício :pencil:**
+
+Reimplemente o servidor de Banco do exercício anterior de modo a que este aceite a conexão simultânea de múltiplos clientes.
