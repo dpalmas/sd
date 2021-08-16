@@ -1,5 +1,5 @@
-public class Cadeira {
+public class Cadeira 
+{
     boolean livre = true;
-    
     Cliente cliente;
 }
