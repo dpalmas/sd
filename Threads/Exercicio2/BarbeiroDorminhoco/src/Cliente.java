@@ -1,31 +1,34 @@
-public class Cliente extends Thread {
+public class Cliente extends Thread
+{
     int id;
     boolean atendido = false;
     boolean esperando = false;
-    
+
     Cadeira cadeira;
     BarbeiroDorminhoco barbeiroDorminhoco;
 
-    Cliente(BarbeiroDorminhoco barbeiroDorminhoco, int id) {
+    Cliente(BarbeiroDorminhoco barbeiroDorminhoco, int id)
+    {
         this.barbeiroDorminhoco = barbeiroDorminhoco;
         this.id = id;
     }
 
     @Override
-    public void run() 
+    public void run()
     {
-        // while (true) 
-        // {
-            try 
-            {
-                Thread.sleep(1000);
-                barbeiroDorminhoco.ManejarCliente(this);
-            } catch (Exception e) { }
-        //}
+        try
+        {
+            Thread.sleep(1000);
+            barbeiroDorminhoco.ManejarCliente(this);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public int GetId()
     {
-        return id; 
+        return id;
     }
 }
