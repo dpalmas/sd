@@ -6,18 +6,18 @@ import java.net.Socket;
 import java.rmi.ServerException;
 import java.util.ArrayList;
 
-public class Servidor {
+public class Servidor 
+{
     private int port = 7000;
     private ServerSocket serverSocket;
 
-    public Servidor() throws SecurityException, IOException {
-
+    public Servidor() throws SecurityException, IOException 
+    {
         serverSocket = new ServerSocket(port);
-
         System.out.println("#### Servidor Iniciado #### Porta: " + port);
 
-        while (true) {
-
+        while (true) 
+        {
             Socket s = serverSocket.accept();
             String ip = s.getInetAddress().getHostAddress();
             System.out.println("Conectado com: " + ip);
@@ -29,22 +29,23 @@ public class Servidor {
             String num = "";
             int soma = 0;
 
-            do {
+            do 
+            {
                 num = in.readUTF();
                 int numC = Integer.parseInt(num);
                 soma += numC;
                 Integer.toString(soma);
                 out.writeUTF("Soma:" + soma);
             } while (!num.equals("soma"));
-
             s.close();
             System.out.println("Desconectou :" + ip);
         }
     }
 
-    public static void main(String[] args) {
-
-        try {
+    public static void main(String[] args) 
+    {
+        try 
+        {
             new Servidor();
         } catch (ServerException e) {
             System.out.println("Erro");
