@@ -1,7 +1,6 @@
 class Conta
 {
     int saldo = 0;
-
 }
 
 class Retirada extends Thread
@@ -32,7 +31,6 @@ class Retirada extends Thread
                 e.printStackTrace();
             }
         }
-
     }
 }
 
@@ -58,7 +56,6 @@ class Deposito extends Thread
                     c.saldo += vlrs[i];
                     System.out.println("Deposito: " + vlrs[i] + " - Saldo: " + c.saldo);
                 }
-
             }
             catch (Exception e)
             {
