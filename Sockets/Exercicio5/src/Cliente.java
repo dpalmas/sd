@@ -3,12 +3,15 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Cliente {
-
-    public static void main(String[] args) {
-        try {
+public class Cliente 
+{
+    public static void main(String[] args) 
+    {
+        try 
+        {
             Socket socket;
-            if (args.length == 1) {
+            if (args.length == 1) 
+            {
                 socket = new Socket(args[0], 8181);
             } else {
                 // InetAddress addr = InetAddress.getByAddress("localhost");
@@ -25,8 +28,8 @@ public class Cliente {
 
             s = teclado.readLine();
 
-            while (!s.toLowerCase().equals("sair")) {
-
+            while (!s.toLowerCase().equals("sair")) 
+            {
                 s = in.readLine();
                 System.out.println(s);
 
