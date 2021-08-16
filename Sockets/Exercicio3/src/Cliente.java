@@ -4,9 +4,10 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Cliente {
-    public static void main(String[] args) throws IOException {
-
+public class Cliente 
+{
+    public static void main(String[] args) throws IOException 
+    {
         Socket s = new Socket("127.0.0.1", 7000);
 
         DataInputStream in = new DataInputStream(s.getInputStream());
@@ -17,7 +18,8 @@ public class Cliente {
 
         String str = "";
 
-        do {
+        do 
+        {
             str = teclado.nextLine();
             out.writeUTF(str);
             System.out.println(in.readUTF());
