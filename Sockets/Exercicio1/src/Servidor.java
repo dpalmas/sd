@@ -5,18 +5,19 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.ServerException;
 
-public class Servidor {
+public class Servidor 
+{
     private int port = 7000;
     private ServerSocket serverSocket;
 
-    public Servidor() throws ServerException, IOException {
-
+    public Servidor() throws ServerException, IOException 
+    {
         serverSocket = new ServerSocket(port);
 
         System.out.println("#### Servidor iniciado na porta " + port);
 
-        while (true) {
-
+        while (true) 
+        {
             Socket s = serverSocket.accept();
             String ip = s.getInetAddress().getHostAddress();
             System.out.println("### Conectado com " + ip);
@@ -28,7 +29,8 @@ public class Servidor {
             String str = "";
             out.writeUTF("Olá Cliente,Eu sou o Servidor. Digite algo");
 
-            do {
+            do 
+            {
                 str = in.readUTF();
                 out.writeUTF(" ## Servidor ## O Cliente digitou: " + str);
 
@@ -40,9 +42,10 @@ public class Servidor {
         }
     }
 
-    public static void main(String[] args) {
-
-        try {
+    public static void main(String[] args) 
+    {
+        try 
+        {
             new Servidor();
         } catch (ServerException e) {
             System.out.println("#### erro #### ");
