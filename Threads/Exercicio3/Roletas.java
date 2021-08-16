@@ -25,7 +25,6 @@
  * 5. execute: java -cp . Main
  */
 
-import java.util.*;
 import java.text.*;
 
 /**
@@ -36,44 +35,46 @@ import java.text.*;
 /**
  * Contador é um objeto compartilhado pelas threads entrada 1 e entrada 2.
  */
-class ContadorCentral {
+class ContadorCentral
+{
     protected int numPessoas = 0;
-
-
 }
 
 /**
  * Roleta controla uma entrada do parque.
  */
-class Roleta implements Runnable {
+class Roleta implements Runnable
+{
     public int totPessoas = 0;
     public int incr = 0;
     public ContadorCentral contadorCentral;
 
-    public void run() {
+    public void run()
+    {
         Thread thread = Thread.currentThread();
-        synchronized (contadorCentral) {
-            try {
-                for (int i = 0; i < 40000000; i++) {
+        synchronized (contadorCentral)
+        {
+            try
+            {
+                for (int i = 0; i < 40000000; i++)
+                {
                     totPessoas = totPessoas + incr;
                     contadorCentral.numPessoas = contadorCentral.numPessoas + incr;
                 }
-            } catch (Exception e){
-
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
             }
         }
     }
 }
 
-public class Roletas {
-    /**
-     * @param args
-     *            the command line arguments
-     */
-    public static void main(String[] args) {
+public class Roletas
+{
+    public static void main(String[] args)
+    {
         ContadorCentral contador = new ContadorCentral();
-        // if (args.length > 0)
-        // Roleta.limite = Integer.parseInt(args[0]);
         Roleta e1 = new Roleta();
         e1.contadorCentral = contador;
         e1.incr = 1;
@@ -86,12 +87,18 @@ public class Roletas {
         Thread t2 = new Thread(e2, "Entrada 2");
         t1.start();
         t2.start();
-        // aguarda as duas threads encerrarem para terminar a main
-        try {
+        
+        try
+        {
             t1.join();
             t2.join();
-        } catch (InterruptedException e) {
-        } finally {
+        }
+        catch (InterruptedException e)
+        {
+            System.out.println("Target thread was interrupted");
+        }
+        finally
+        {
             DecimalFormat estilo = new DecimalFormat("###,###,###,###");
             System.out.println("\n*** FIM DA CONTAGEM ***");
             System.out.println("*** Entrada 1: " + estilo.format(e1.totPessoas)
