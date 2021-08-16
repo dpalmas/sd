@@ -2,9 +2,9 @@ public class Client extends Thread
 {
     Bar bar = new Bar();
 
-    boolean hasOrdered = false; 
-    boolean hasConsumed = false; 
-    boolean isWaiting = false; 
+    boolean hasOrdered = false;
+    boolean hasConsumed = false;
+    boolean isWaiting = false;
 
     Client(Bar bar)
     {
@@ -12,13 +12,16 @@ public class Client extends Thread
     }
 
     @Override
-    public void run() 
+    public void run()
     {
-        while(bar.GetBarIsOpen()) 
+        while (bar.GetBarIsOpen())
         {
-            try 
+            try
             {
-                if(hasConsumed) { return; }
+                if (hasConsumed)
+                {
+                    return;
+                }
 
                 if (hasOrdered)
                 {
@@ -28,30 +31,30 @@ public class Client extends Thread
                     }
                     ReceiveOrder();
                     ConsumeOrder();
-                }  
-            } 
-            catch (InterruptedException e) 
+                }
+            }
+            catch (InterruptedException e)
             {
                 e.printStackTrace();
             }
         }
     }
-    
+
     void Order()
     {
         // uma condição de porcentagem caso ele não beba. 
-        hasOrdered = true; 
+        hasOrdered = true;
         System.out.println("Cliente: Quero uma batata");
     }
-    
-    synchronized void WaitForOrder() throws InterruptedException    
+
+    synchronized void WaitForOrder() throws InterruptedException
     {
         System.out.println("Cliente: Esperando pedido");
-        isWaiting = true; 
+        isWaiting = true;
         wait();
     }
 
-    private void ReceiveOrder() throws InterruptedException 
+    private void ReceiveOrder() throws InterruptedException
     {
         isWaiting = false;
         System.out.println("Cliente: Recebendo pedido");
@@ -61,7 +64,7 @@ public class Client extends Thread
     private void ConsumeOrder() throws InterruptedException
     {
         hasConsumed = true;
-        hasOrdered = false;  
+        hasOrdered = false;
 
         System.out.println("Cliente: Consumindo pedido");
         Thread.sleep(1000);
@@ -79,11 +82,11 @@ public class Client extends Thread
 
     public boolean GetHasConsumed()
     {
-        return hasConsumed; 
+        return hasConsumed;
     }
 
     public void SetHasConsumed(boolean value)
     {
-        hasConsumed = value; 
+        hasConsumed = value;
     }
 }
