@@ -2,41 +2,39 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
-public class BarbeiroDorminhoco {
+public class BarbeiroDorminhoco
+{
     boolean dormindo = true;
     boolean cortando = false;
-    int quantidadeCadeiras = 3; 
-
-    //int contadorClientesAtendidos = 0; 
+    int quantidadeCadeiras = 3;
 
     List<Cliente> clientesRecebidos = new ArrayList<Cliente>();
-    LinkedBlockingQueue<Cliente> filaDeClientes = new LinkedBlockingQueue<>(); 
+    LinkedBlockingQueue<Cliente> filaDeClientes = new LinkedBlockingQueue<>();
 
     public synchronized void Trabalhando()
     {
-        try 
+        try
         {
-            while(filaDeClientes.size() == 0)
+            while (filaDeClientes.size() == 0)
             {
                 System.out.println("Barbeiro: Não tem ninguem na fila, vou dormir um pouquinho");
-                dormindo = true; 
+                dormindo = true;
                 wait();
             }
 
             int idCliente = filaDeClientes.peek().GetId();
 
-            if(filaDeClientes.size() > 0)
+            if (filaDeClientes.size() > 0)
             {
                 filaDeClientes.poll();
-                cortando = true; 
+                cortando = true;
                 System.out.println("Barbeiro: Estou atendendo o Cliente " + idCliente);
                 Thread.sleep(1000);
 
             }
-            
             notifyAll();
-
-        } catch (InterruptedException e) 
+        }
+        catch (InterruptedException e)
         {
             e.printStackTrace();
         }
@@ -45,11 +43,11 @@ public class BarbeiroDorminhoco {
     public synchronized void ManejarCliente(Cliente cliente)
     {
         int idCliente = cliente.GetId();
-        try 
+        try
         {
             if (!clientesRecebidos.contains(cliente))
             {
-                if(filaDeClientes.size() < quantidadeCadeiras)
+                if (filaDeClientes.size() < quantidadeCadeiras)
                 {
                     filaDeClientes.offer(cliente);
                     System.out.println("Cliente " + idCliente + ": Estou na fila");
@@ -65,19 +63,17 @@ public class BarbeiroDorminhoco {
 
             while (filaDeClientes.size() < quantidadeCadeiras)
             {
-                if(dormindo)
+                if (dormindo)
                 {
                     System.out.println("Cliente " + idCliente + ": Acorda aí barbeiro");
                     notify();
-                    dormindo = false; 
+                    dormindo = false;
                 }
-                //System.out.println("antes do wait do cliente");
                 wait();
             }
-
             notifyAll();
-            
-        } catch (InterruptedException e) 
+        }
+        catch (InterruptedException e)
         {
             e.printStackTrace();
         }
