@@ -1,10 +1,11 @@
 import java.util.ArrayList;
 
-public class Main {
+public class Main
+{
 
     public static ArrayList<Cadeira> cadeiras = new ArrayList<>();
 
-    public static void main(String[] args) 
+    public static void main(String[] args)
     {
         BarbeiroDorminhoco barbeiroDorminhoco = new BarbeiroDorminhoco();
 
@@ -32,7 +33,7 @@ public class Main {
         clienteThread9.start();
         clienteThread10.start();
 
-        try 
+        try
         {
             barbeiroThread.join();
             clienteThread1.join();
@@ -45,8 +46,11 @@ public class Main {
             clienteThread8.join();
             clienteThread9.join();
             clienteThread10.join();
-            
-        } 
-        catch (Exception e) {  }
+
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
