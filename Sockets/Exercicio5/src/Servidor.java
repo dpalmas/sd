@@ -3,27 +3,32 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Servidor {
-    public static void main(String[] args) {
-
-        try {
+public class Servidor 
+{
+    public static void main(String[] args) 
+    {
+        try 
+        {
             ServerSocket s = null;
             s = new ServerSocket(8181);
             System.out.println("Servidor Inciado");
 
-            while (true) {
+            while (true) 
+            {
                 Socket socket = s.accept();
             }
         } catch (IOException e) {
             e.printStackTrace();
 
         }
+        
         Conta minhaConta = new Conta();
         Scanner leitura = new Scanner(System.in);
         String nome;
         int num, op;
         float saldo, valor, lim;
-        do {
+        do 
+        {
             System.out.println("----- * Menu * > Conta Bancaria-----");
             System.out.println("1- Inserir dados:");
             System.out.println("2- Mostrar dados");
@@ -33,8 +38,8 @@ public class Servidor {
             System.out.println("0 - Sair ---------------------------");
             leitura.nextLine();
             op = leitura.nextInt();
-            switch (op) {
-
+            switch (op) 
+            {
                 case 1:
                     System.out.println("Entre com o nome:");
                     nome = leitura.nextLine();
@@ -75,44 +80,53 @@ public class Servidor {
 
 }
 
-class Conta {
+class Conta 
+{
     private int Numero;
     public int op;
     private String Dono;
     private double Saldo;
 
-    public Conta() {
+    public Conta() 
+    {
         this.Numero = 0;
         this.Dono = " ";
         this.Saldo = 0;
 
     }
 
-    public int getNumero() {
+    public int getNumero() 
+    {
         return Numero;
     }
 
-    public void setNumero(int Numero) {
+    public void setNumero(int Numero) 
+    {
         this.Numero = Numero;
     }
 
-    public String getDono() {
+    public String getDono() 
+    {
         return Dono;
     }
 
-    public void setDono(String Dono) {
+    public void setDono(String Dono) 
+    {
         this.Dono = Dono;
     }
 
-    public double getSaldo() {
+    public double getSaldo() 
+    {
         return Saldo;
     }
 
-    public void setSaldo(double Saldo) {
+    public void setSaldo(double Saldo) 
+    {
         this.Saldo = Saldo;
     }
 
-    boolean saca(double quantidade) {
+    boolean saca(double quantidade) 
+    {
         if (this.Saldo < quantidade)
             return false;
         else {
@@ -121,24 +135,27 @@ class Conta {
         }
     }
 
-    void deposita(double quantidade) {
+    void deposita(double quantidade) 
+    {
         this.Saldo = this.Saldo + quantidade;
     }
 
-    void inseredados(String a, int b, float c, float l) {
+    void inseredados(String a, int b, float c, float l) 
+    {
         this.Dono = a;
         this.Numero = b;
         this.Saldo = c;
-
     }
 
-    void mostrardado() {
+    void mostrardado() 
+    {
         System.out.println("Dono da Conta: " + this.getDono());
         System.out.println("Numero da Conta: " + this.getNumero());
         System.out.println("Saldo atual: " + this.getSaldo());
     }
 
-    void mostrarsal() {
+    void mostrarsal() 
+    {
         System.out.println("Saldo Atual: " + this.getSaldo());
 
     }
